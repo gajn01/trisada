@@ -349,8 +349,8 @@ class ComposerStaticInite60a25d802940e5e11e7da4b9be8e9ae
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -621,6 +621,10 @@ class ComposerStaticInite60a25d802940e5e11e7da4b9be8e9ae
         'App\\Http\\Livewire\\Store\\CapaResult' => __DIR__ . '/../..' . '/app/Http/Livewire/Store/CapaResult.php',
         'App\\Http\\Livewire\\Store\\Store' => __DIR__ . '/../..' . '/app/Http/Livewire/Store/Store.php',
         'App\\Http\\Livewire\\Store\\StoreDetails' => __DIR__ . '/../..' . '/app/Http/Livewire/Store/StoreDetails.php',
+        'App\\Http\\Livewire\\Terminal\\TerminalDetails' => __DIR__ . '/../..' . '/app/Http/Livewire/Terminal/TerminalDetails.php',
+        'App\\Http\\Livewire\\Terminal\\TerminalList' => __DIR__ . '/../..' . '/app/Http/Livewire/Terminal/TerminalList.php',
+        'App\\Http\\Livewire\\Toda\\TodaDetails' => __DIR__ . '/../..' . '/app/Http/Livewire/Toda/TodaDetails.php',
+        'App\\Http\\Livewire\\Toda\\TodaList' => __DIR__ . '/../..' . '/app/Http/Livewire/Toda/TodaList.php',
         'App\\Http\\Livewire\\Trip\\CreateTrip' => __DIR__ . '/../..' . '/app/Http/Livewire/Trip/CreateTrip.php',
         'App\\Http\\Livewire\\Trip\\Printables\\TripTicketPrintout' => __DIR__ . '/../..' . '/app/Http/Livewire/Trip/Printables/TripTicketPrintout.php',
         'App\\Http\\Livewire\\Trip\\Trip' => __DIR__ . '/../..' . '/app/Http/Livewire/Trip/Trip.php',
@@ -669,6 +673,8 @@ class ComposerStaticInite60a25d802940e5e11e7da4b9be8e9ae
         'App\\Models\\SubSubCategoryLabel' => __DIR__ . '/../..' . '/app/Models/SubSubCategoryLabel.php',
         'App\\Models\\Summary' => __DIR__ . '/../..' . '/app/Models/Summary.php',
         'App\\Models\\Tarif' => __DIR__ . '/../..' . '/app/Models/Tarif.php',
+        'App\\Models\\Terminal' => __DIR__ . '/../..' . '/app/Models/Terminal.php',
+        'App\\Models\\Toda' => __DIR__ . '/../..' . '/app/Models/Toda.php',
         'App\\Models\\Transaction' => __DIR__ . '/../..' . '/app/Models/Transaction.php',
         'App\\Models\\TripCategory' => __DIR__ . '/../..' . '/app/Models/TripCategory.php',
         'App\\Models\\TripCost' => __DIR__ . '/../..' . '/app/Models/TripCost.php',
