@@ -1,0 +1,47 @@
+:root {
+    --primary-color: #FCF9F6;
+    --secondary-color: #FFEFD4;
+    --cta-color: #790000;
+    --tertiary-color: #e0b444;
+    --bs-accordion-btn-focus-border-color : #790000 !important;
+}
+.white-bg{
+    background-color: #fff !important;
+}
+.primary-bg{
+    background-color: var(--primary-color)!important;
+}
+.secondary-bg{
+    background-color: var(--secondary-color)!important;
+}
+.cta-bg{
+    background-color: var(--cta-color) !important;
+    color: var(--primary-color) !important;
+}
+.cta-color{
+    color: var(--cta-color) !important;
+}
+.icon {
+    background-color: transparent;
+    color: #790000;
+    fill: #790000;
+    width: 20px;
+    margin: 0 auto;
+    margin-left: 10px;
+}
+.icon:hover {
+   opacity: .8;
+   cursor: pointer;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.list-style-decimal{
+    list-style: decimal;
+}

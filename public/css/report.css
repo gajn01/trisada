@@ -1,0 +1,23 @@
+@media print{
+    .page-break-before {
+        page-break-before: always;
+    }
+
+    .page-break-after {
+        page-break-after: always;
+    }
+}
+
+.print-header{
+    display: table-header-group;
+}
+.print-bg-gray {
+    background-color:gainsboro;
+}
+
+.report-sidepanel {
+    background-color: #fcf9f6 !important;
+    border-right: 1px solid #e0b444;
+    border-bottom: 1px solid #e0b444;
+    position:fixed;
+}
