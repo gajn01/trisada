@@ -46,9 +46,11 @@
                 <table class="table app-table-hover mb-0 text-left">
                     <thead>
                         <tr>
-                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda_name')"
-                                href="#">Toda Name <x-column-sort direction="{{ $sortdirection }}"
-                                    for="toda_name" currentsort="{{ $sortby }}" /> </a></th>
+                            @if (auth()->user()->user_type == 0)
+                                <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda_name')"
+                                    href="#">Toda Name <x-column-sort direction="{{ $sortdirection }}"
+                                        for="toda_name" currentsort="{{ $sortby }}" /> </a></th>
+                            @endif
                             <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda_name')"
                                     href="#">Terminal Name <x-column-sort direction="{{ $sortdirection }}"
                                         for="terminal_name" currentsort="{{ $sortby }}" /> </a></th>
@@ -61,7 +63,9 @@
                     <tbody>
                         @forelse ($terminalList as $list)
                         <tr>
-                            <td class="cell d-none d-lg-table-cell"><span>{{ $list->toda->toda_name }}</span></td>
+                            @if (auth()->user()->user_type == 0)
+                                <td class="cell d-none d-lg-table-cell"><span>{{ $list->toda->toda_name }}</span></td>
+                            @endif
                             <td class="cell d-none d-lg-table-cell"><span>{{ $list->terminal_name }}</span></td>
                             <td class="cell d-none d-lg-table-cell"><span>{{ $list->terminal_address }}</span></td>
                             <td class="cell text-end">

@@ -32,6 +32,7 @@ class TerminalList extends Component
     }
     public function mount(){
         $this->todaList = $this->getTodaList();
+        // dd(auth()->user()->toda_id);
     }
     public function render()
     {   
@@ -44,8 +45,11 @@ class TerminalList extends Component
     public function getTerminalList(){
         return Terminal::where(function ($query){
              $query->where('terminal_name', 'like', '%' . $this->search . '%');
-        }
-        )->paginate($this->displaypage);
+        })
+        ->when(auth()->user()->user_type != 0 ,function ($query){
+            $query->where('toda_id', auth()->user()->toda_id);
+        })
+        ->paginate($this->displaypage);
     }
     public function onCancel(){
         $this->resetValidation();

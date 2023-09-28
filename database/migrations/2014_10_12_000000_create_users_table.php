@@ -18,6 +18,7 @@ return new class extends Migration
             $table->tinyInteger('user_type');
             $table->boolean('is_active');
             $table->longText('user_access');
+            $table->bigInteger('toda_id')->unsigned()->nullable();
             $table->bigInteger('created_by_id')->unsigned()->nullable();
             $table->bigInteger('last_updated_by_id')->unsigned()->nullable();
             $table->string('password');

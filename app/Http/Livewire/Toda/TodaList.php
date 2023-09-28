@@ -35,8 +35,11 @@ class TodaList extends Component
     public function getTodaList(){
         return Toda::where(function ($query){
              $query->where('toda_name', 'like', '%' . $this->search . '%');
-        }
-        )->paginate($this->displaypage);
+        })
+        ->when(auth()->user()->user_type != 0 ,function ($query){
+            $query->find(auth()->user()->toda_id);
+        })
+        ->paginate($this->displaypage);
     }
     public function onCancel(){
         $this->resetValidation();
