@@ -156,7 +156,8 @@
                         <div class="settings-form">
                             <div class="mb-2  d-flex flex-column">
                                 <label for="toda_id" class="form-label">Toda</label>
-                                <select name="toda_id" id="toda_id" class="form-select form-select-md  d-inline-flex w-auto" wire:model="terminal.toda_id">
+                                <select name="toda_id" id="toda_id" class="form-select form-select-md  d-inline-flex w-auto" wire:model="terminal.toda_id"
+                                @disabled(auth()->user()->user_type == 0 ? false : true)>
                                     <option value hidden selected>--Select Toda--</option>
                                     @foreach ($todaList as $toda)
                                         <option value="{{$toda->id}}">{{$toda->toda_name}}</option>
@@ -167,7 +168,7 @@
                                 @enderror
                             </div>
                             <div class="mb-2">
-                                <label for="terminal_name" class="form-label small">terminal Name<span
+                                <label for="terminal_name" class="form-label ">Terminal Name<span
                                         class="text-danger">*</span></label>
                                 <input id="terminal_name" name="terminal_name" wire:model.defer="terminal.terminal_name"
                                     type="text" class="form-control form-control-sm" required>
@@ -176,7 +177,7 @@
                                 @enderror
                             </div>
                             <div class="mb-2">
-                                <label for="terminal_address" class="form-label small">Terminal Address<span
+                                <label for="terminal_address" class="form-label ">Terminal Address<span
                                         class="text-danger">*</span></label>
                                 <textarea id="terminal_address" name="terminal_address" wire:model.defer="terminal.terminal_address" class="form-control"
                                     name="" id="" rows="3"></textarea>

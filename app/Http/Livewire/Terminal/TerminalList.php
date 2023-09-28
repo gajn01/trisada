@@ -32,7 +32,11 @@ class TerminalList extends Component
     }
     public function mount(){
         $this->todaList = $this->getTodaList();
+        $this->terminal = new Terminal;
         // dd(auth()->user()->toda_id);
+        if(auth()->user()->user_type == 1 ){
+            $this->terminal->toda_id = auth()->user()->toda_id;
+        }
     }
     public function render()
     {   
@@ -53,7 +57,6 @@ class TerminalList extends Component
     }
     public function onCancel(){
         $this->resetValidation();
-        $this->terminal = new Terminal;
         $this->isedit = false;
     }
     public function onSave(){
