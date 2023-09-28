@@ -2,14 +2,14 @@
     <nav aria-label="breadcrumb" class="">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Driver Management</li>
+            <li class="breadcrumb-item active" aria-current="page">Terminal Management</li>
         </ol>
     </nav>
 
  
     <div class="row g-3 mb-4 align-items-center justify-content-between">
         <div class="col-auto">
-            <h1 class="app-page-title mb-0">Driver Management</h1>
+            <h1 class="app-page-title mb-0">Terminal Management</h1>
         </div>
         <div class="col-auto">
             <div class="page-utilities">
@@ -25,7 +25,7 @@
                     <!--//col-->
                     @if (Gate::allows('allow-create', 'module-driver-management'))
                         <div class="col-auto">
-                            <a class="btn app-btn-primary" wire:click="create" data-bs-toggle="modal"
+                            <a class="btn app-btn-primary" wire:click="onCancel" data-bs-toggle="modal"
                                 data-bs-target="#createModal" href="#">
                                 Create
                             </a>
@@ -46,46 +46,46 @@
                 <table class="table app-table-hover mb-0 text-left">
                     <thead>
                         <tr>
-                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('employee_id')" href="#">Employee ID <x-column-sort direction="{{ $sortdirection }}" for="employee_id" currentsort="{{ $sortby }}" /> </a></th>
-                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('name')" href="#">Name <x-column-sort direction="{{ $sortdirection }}" for="name" currentsort="{{ $sortby }}" /></a></th>
-                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('department_id')" href="#">Department <x-column-sort direction="{{ $sortdirection }}" for="department_id" currentsort="{{ $sortby }}" /></a></th>
-                            <th class="cell d-lg-none"><a wire:click="sort('name')" href="#">Details <x-column-sort direction="{{ $sortdirection }}" for="name" currentsort="{{ $sortby }}"  /></a></th>
+                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda_name')"
+                                href="#">Toda Name <x-column-sort direction="{{ $sortdirection }}"
+                                    for="toda_name" currentsort="{{ $sortby }}" /> </a></th>
+                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda_name')"
+                                    href="#">Terminal Name <x-column-sort direction="{{ $sortdirection }}"
+                                        for="terminal_name" currentsort="{{ $sortby }}" /> </a></th>
+                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('terminal_address')"
+                                    href="#">Terminal Address <x-column-sort direction="{{ $sortdirection }}"
+                                        for="toda_address" currentsort="{{ $sortby }}" /></a></th>
                             <th class="cell"></th>
                         </tr>
                     </thead>
                     <tbody>
-                     {{--    @forelse ($driver_list as $d)
-                            <tr>
-                                <td class="cell d-none d-lg-table-cell"><span>{{ $d->employee_id }}</span></td>
-                                <td class="cell d-none d-lg-table-cell"><span>{{ $d->name }}</span></td>
-                                <td class="cell d-none d-lg-table-cell"><span>{{ $d->department ? $d->department->name : 'Logistic'  }}</span></td>
-                                <td class="cell d-lg-none clickable">
-                                    <span class="fw-bold">Employee ID : </span> <span>{{ $d->employee_id }}</span><br>
-                                    <span class="fw-bold">Name: </span> <span>{{ $d->name }}</span><br>
-                                    <span class="fw-bold">Department: </span> <span>{{ $d->department ? $d->department->name : 'Logistic'  }}</span><br>
-                                </td>
-                                <td class="cell text-end">
-                                    @if (Gate::allows('allow-edit', 'module-driver-management'))
+                        @forelse ($terminalList as $list)
+                        <tr>
+                            <td class="cell d-none d-lg-table-cell"><span>{{ $list->toda->toda_name }}</span></td>
+                            <td class="cell d-none d-lg-table-cell"><span>{{ $list->terminal_name }}</span></td>
+                            <td class="cell d-none d-lg-table-cell"><span>{{ $list->terminal_address }}</span></td>
+                            <td class="cell text-end">
+                                @if (Gate::allows('allow-edit', 'module-driver-management'))
                                     <a class="btn btn-link link-primary px-1" title="Update"
-                                        wire:click="getId({{ $d->id }},true)" data-bs-toggle="modal"
+                                        wire:click="onGetId({{ $list->id }},true)" data-bs-toggle="modal"
                                         data-bs-target="#createModal">
                                         <i class="fa-edit fa-solid"></i>
                                     </a>
-                                    @endif
-                                    @if (Gate::allows('allow-delete', 'module-driver-management'))
+                                @endif
+                                @if (Gate::allows('allow-delete', 'module-driver-management'))
                                     <a class="btn btn-link link-danger px-1" title="Delete" href="#"
-                                        wire:click="getId({{ $d->id }},'false')" data-bs-toggle="modal"
+                                        wire:click="onGetId({{ $list->id }})" data-bs-toggle="modal"
                                         data-bs-target="#deleteModal">
                                         <i class="fa-trash fa-solid"></i>
                                     </a>
-                                    @endif
-                                </td>
-                            </tr>
+                                @endif
+                            </td>
+                        </tr>
                         @empty
                             <tr>
-                                <td class="text-danger text-center" colspan="3">NO DATA</td>
+                                <td class="text-danger text-center" colspan="4">NO DATA</td>
                             </tr>
-                        @endforelse --}}
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -107,36 +107,34 @@
             </div>
 
             <div class="col-auto mb-2">
-                {{-- {{ $driver_list->onEachSide(1)->links() }} --}}
+                {{ $terminalList->onEachSide(1)->links() }}
             </div>
         </div>
     </nav>
     <!--//app-pagination-->
     <!-- Delete Modal -->
     <div wire:ignore class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false"
-        tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title">Delete Driver</h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Delete Terminal</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    Do you want to delete selected record?
                 </div>
-                <div class="modal-body">
-
-                    <div class="">
-                        Do you want to delete selected record?
-                    </div>
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" wire:click="delete" class="btn btn-danger text-light"
-                        data-bs-dismiss="modal">Delete</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" wire:click="onDelete" class="btn btn-danger text-light"
+                    data-bs-dismiss="modal">Delete</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
+
 
     <!-- Create Modal -->
     <div wire:ignore.self class="modal fade" id="createModal" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -144,36 +142,41 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title">{{ $isedit ? 'Update' : 'Create' }} Driver</h6>
-                    <button type="button" wire:click="cancel" class="btn-close" data-bs-dismiss="modal"
+                    <h6 class="modal-title">{{ $isedit ? 'Update' : 'Create' }} Terminal</h6>
+                    <button type="button" wire:click="onCancel" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form wire:submit.prevent="save">
                         @csrf
                         <div class="settings-form">
-                            <div class="mb-2">
-                                <div class="form-check form-switch">
-                                    <label class="form-check-label" for="toggle-switch">Logistic</label>
-                                    <input class="form-check-input" type="checkbox" id="toggle-switch" wire:change="changeDepartment" wire:model="is_logistic" >
-                                </div>
-                            </div>
-                          
-                            <div class="mb-2">
-                                <label for="employee_id" class="form-label small">Employee ID<span
-                                        class="text-danger">*</span></label>
-                                <input id="employee_id" name="employee_id" wire:model.defer="drivers.employee_id"
-                                type="number" inputmode="numeric" class="form-control form-control-sm" min="0" required >
-                                @error('drivers.employee_id')
+                            <div class="mb-2  d-flex flex-column">
+                                <label for="toda_id" class="form-label">Toda</label>
+                                <select name="toda_id" id="toda_id" class="form-select form-select-md  d-inline-flex w-auto" wire:model="terminal.toda_id">
+                                    <option value hidden selected>--Select Toda--</option>
+                                    @foreach ($todaList as $toda)
+                                        <option value="{{$toda->id}}">{{$toda->toda_name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('terminal.toda_id')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-2">
-                                <label for="name" class="form-label small">Name<span
+                                <label for="terminal_name" class="form-label small">terminal Name<span
                                         class="text-danger">*</span></label>
-                                <input id="name" name="name" wire:model.defer="drivers.name" type="text"
-                                    class="form-control form-control-sm" required>
-                                @error('drivers.name')
+                                <input id="terminal_name" name="terminal_name" wire:model.defer="terminal.terminal_name"
+                                    type="text" class="form-control form-control-sm" required>
+                                @error('terminal.terminal_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-2">
+                                <label for="terminal_address" class="form-label small">Terminal Address<span
+                                        class="text-danger">*</span></label>
+                                <textarea id="terminal_address" name="terminal_address" wire:model.defer="terminal.terminal_address" class="form-control"
+                                    name="" id="" rows="3"></textarea>
+                                @error('terminal.terminal_address')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -181,8 +184,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" wire:click="save" class="btn btn-primary text-light">Save</button>
-                    <button type="button" wire:click="cancel" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                    <button type="button" wire:click="onSave" class="btn btn-primary text-light">{{ $isedit ? 'Update' : 'Save' }} </button>
+                    <button type="button" wire:click="onCancel" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
                 </div>
             </div>
         </div>
