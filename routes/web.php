@@ -6,13 +6,12 @@ use App\Http\Livewire\Terminal\TerminalList;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Dashboard\Dashboard;
 /* User */
-use App\Http\Livewire\Settings\User\UserList;
 use App\Http\Livewire\Settings\User\UserDetails;
 
 use App\Http\Livewire\Auth\ChangePassword;
 use App\Http\Livewire\Toda\TodaDetails;
 use App\Http\Livewire\Toda\TodaList;
-
+use App\Http\Livewire\User\UserList;
 
 /* Auto-redirect based on authentication status. */
 
@@ -36,6 +35,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
        /* Terminal */
        Route::get('terminal', TerminalList::class)->name('terminal-list');
        Route::get('terminal/{id}', TerminalDetails::class)->name('terminal-details');
+
+       /* User */
+       Route::get('user', UserList::class)->name('user-list');
+
     
 });
 

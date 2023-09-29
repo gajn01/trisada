@@ -9,26 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->integer('access_type');
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('midname')->nullable();
+            $table->string('contact_no')->nullable();
+            $table->string('img')->nullable();
+            $table->string('address')->nullable();
+            $table->date('birthday')->nullable();
             $table->string('email')->unique();
-            $table->tinyInteger('user_type');
-            $table->boolean('is_active');
-            $table->longText('user_access');
-            $table->bigInteger('toda_id')->unsigned()->nullable();
-            $table->bigInteger('created_by_id')->unsigned()->nullable();
-            $table->bigInteger('last_updated_by_id')->unsigned()->nullable();
+            $table->string('username')->unique();
             $table->string('password');
-            $table->rememberToken();
             $table->timestamps();
-            $table->foreign('created_by_id')->references('id')->on('users')->restrictOnDelete();
-            $table->foreign('last_updated_by_id')->references('id')->on('users')->restrictOnDelete();
         });
     }
-
     /**
      * Reverse the migrations.
      */

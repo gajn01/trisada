@@ -12,6 +12,8 @@ class Terminal extends Model
         'toda_id',
         'terminal_name',
         'terminal_address',
+        'terminal_long',
+        'terminal_lat',
         'created_at',
         'updated_at'
     ];

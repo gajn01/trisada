@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('terminals', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('toda_id');
+            $table->string('terminal_name');
+            $table->text('terminal_address')->nullable();
+            $table->decimal('terminal_long', 10, 7)->nullable();
+            $table->decimal('terminal_lat', 10, 7)->nullable();
+            $table->timestamps(); // Adds created_at and updated_at columns
+            $table->foreign('toda_id')->references('id')->on('todas');
         });
     }
 

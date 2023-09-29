@@ -11,14 +11,21 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'Super User',
-            'email' => 'su@example.com',
+            'access_type' =>0,
+            'firstname' => 'Super',
+            'midname' => '',
+            'lastname' => 'Admin',
+            'contact_no' => '1234567890',
+            'img' => 'user.png',
+            'address' => '123 Main St',
+            'age' => 0,
+            'birthday' => '1993-06-15',
+            'email' => 'admin@example.com',
+            'username' => 'admin',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => null,
-            'toda_id' => null,
-            'user_type' => 0,
-            'is_active' => true,
-            'user_access' => '',
         ]);
+        // You can create more users as needed
+        // User::factory(10)->create();
+    
     }
 }

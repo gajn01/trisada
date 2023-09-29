@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('todas', function (Blueprint $table) {
+        Schema::create('drivers', function (Blueprint $table) {
             $table->id();
-            $table->string('toda_name');
-            $table->text('toda_desc')->nullable();
-            $table->string('toda_brgy')->nullable();
-            $table->string('toda_city')->nullable();
-            $table->string('toda_province')->nullable();
-            $table->timestamps(); 
+            $table->timestamps();
         });
     }
 
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todas');
+        Schema::dropIfExists('drivers');
     }
 };
