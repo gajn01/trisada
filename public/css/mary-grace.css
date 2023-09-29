@@ -23,7 +23,7 @@ h6,
 }
 
 a {
-    color: var(--cta-color);
+    color: var(--secondary-color);
     text-decoration: none
 }
 
@@ -140,9 +140,8 @@ button.close:focus {
 }
 
 .app-btn-primary {
-    background: var(--cta-color);
-    color: var(--primary-color);
-    border-color: var(--cta-color)
+    background: var(--primary-color);
+    color: var(--text-color);
 }
 
 .app-btn-primary:hover,
@@ -233,7 +232,8 @@ textarea.form-control{
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .1);
     border-bottom: 1px solid #e7e9ed;
     height: 56px;
-    background: var(--primary-color)
+    background: var(--Tertiary-color);
+    color: var(--text-color);
 }
 
 .app-header-inner {
@@ -488,7 +488,6 @@ textarea.form-control{
     left: 0;
     top: 0;
     font-size: .875rem;
-    border-right: 1px solid #e0b444
 }
 
 .app-sidepanel .panel-drop {
@@ -498,8 +497,7 @@ textarea.form-control{
 .app-sidepanel .sidepanel-inner {
     position: relative;
     z-index: 10;
-    background: var(--primary-color);
-    ;
+    background: var(--secondary-color);
     box-shadow: rgba(0, 0, 0, .05) 0px 8px 15px;
     width: 250px;
     height: 100%
@@ -511,7 +509,7 @@ textarea.form-control{
     z-index: 20;
     right: -2rem;
     top: 0;
-    color: var(--primary-color);
+    color: var(--text-color);
     font-size: 2rem
 }
 
@@ -559,7 +557,7 @@ textarea.form-control{
 }
 
 .app-nav {
-    color: #5d6778;
+    color: var(--text-color);
     display: block;
     padding: 0;
     width: 100%
@@ -571,24 +569,21 @@ textarea.form-control{
 
 .app-nav .nav-item {
     display: block;
-    color: #5d6778;
-    background: var(--primary-color)
+    color: var(--text-color);
 }
 
 .app-nav .nav-link {
     display: block;
     padding: .875rem 1rem;
-    color: #252930;
+    color: var(--text-color);
     position: relative;
     display: block;
     padding-left: 3rem;
-    border-left: 3px solid rgba(0, 0, 0, 0)
 }
 
 .app-nav .nav-link.active {
-    color: var(--cta-color);
-    background: var(--secondary-color);
-    border-left: 3px solid var(--cta-color);
+    /* color: var(--cta-color); */
+    border-right: 3px solid var(--cta-color);
     font-weight: 500
 }
 
@@ -744,7 +739,7 @@ textarea.form-control{
     min-height: 100vh;
     height: 100%;
     width: 100%;
-    background: #faf2e4;
+    background: var(--cta-color);
     padding-top: 56px;
     overflow-x: hidden
 }
@@ -1424,7 +1419,7 @@ textarea.form-control{
     }
 }
 .text-marygrace {
-    color: #7E0000;
+    color: var(--text-color);
 }
 
 .bg-marygrace {
@@ -1437,7 +1432,7 @@ textarea.form-control{
 }
 
 .bg-mgdarkred {
-    background-color: #7E0000;
+    background-color: var(--cta-color);
 }
 
 .bg-mgcream{

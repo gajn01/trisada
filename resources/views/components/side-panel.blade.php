@@ -4,7 +4,7 @@
         <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
         <div class="app-branding text-center">
             <a class="app-logo" href="{{ url('dashboard') }}"><img class="logo-icon me-2"
-                    src="{{ asset('img/mg-logo.png') }}" alt="logo"></a>
+                    src="{{ asset('img/small.png') }}" alt="logo"></a>
         </div>
         <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
             <ul class="app-menu list-unstyled accordion" id="menu-accordion">

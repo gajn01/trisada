@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-center align-items-center h-100">
         <div class="row">
             <div class="d-flex col-12 col-lg-6 justify-content-center">
-                <img src="../img/mg-store.png" class="img-fluid i" alt="">
+                <img src="../img/big.png" width="300" height="150" class="img-fluid i" alt="">
             </div>
             <div class="col-12 col-lg-6">
                 <h2 class="text-center mb-3">Sign-in</h2>

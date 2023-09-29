@@ -3,7 +3,7 @@
     <div class="sidepanel-inner d-flex flex-column">
         <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
         <div class="app-branding">
-            <a class="app-logo" href="{{ url('dashboard') }}"><img class="logo-icon me-2" src="{{ url('asset/img/logo.png') }}"
+            <a class="app-logo" href="{{ url('dashboard') }}"><img class="logo-icon me-2" src="{{ url('asset/img/small.png') }}"
                     alt="logo"><span class="logo-text"></span></a>
         </div>
         <!--//app-branding-->
