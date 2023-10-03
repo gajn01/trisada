@@ -5,7 +5,7 @@
     {{ $attributes->merge([
         'type' => $type,
         'placeholder' =>  $placeholder ?? '',
-        'class' => 'block w-full mt-1 text-sm rounded-lg focus:ring-accent focus:border-accent focus:shadow-outline-accent focus:outline-none form-input',
+        'class' => 'block w-full mt-1 text-sm rounded-lg focus:ring-secondary focus:border-secondary focus:shadow-outline-secondary focus:outline-none form-input',
     ]) }}
 />
 

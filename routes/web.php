@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Livewire\Dashboard\Dashboard;
 use App\Livewire\Login;
+use App\Livewire\Terminal\TerminalList;
+use App\Livewire\Toda\TodaList;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,15 @@ Route::get('/', function () {
 
 Route::get('/login',Login::class)->name('login');
 
+
+
+
 Route::get('/dashboard',Dashboard::class)->name('dashboard');
+
+Route::get('toda', TodaList::class)->name('toda-list');
+
+
+Route::get('terminal', TerminalList::class)->name('terminal-list');
+
 
 

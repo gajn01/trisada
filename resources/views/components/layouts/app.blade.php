@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html :class="{ 'theme-dark': dark }" x-data="data()"  lang="en">
+<html :class="{ 'dark': dark }" x-data="data()"  lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
     <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         <x-side-panel />
         <div class="flex flex-col flex-1 w-full">
@@ -24,11 +23,12 @@
             </main>
         </div>
     </div>
-
-
-
     @livewireScripts
     @vite(['resources/js/app.js'])
+    <script src="{{ asset('js/init-alpine.js')}}"></script>
+
+    {{-- @vite(['resources/js/init-alpine.js']) --}}
+
 </body>
 
 </html>

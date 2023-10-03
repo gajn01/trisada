@@ -4,7 +4,6 @@
         <div class="h-32 md:h-auto md:w-1/2 sm:block">
             <img aria-hidden="true" class="object-fill w-full h-full dark:hidden" src="{{ asset('img/mg-store.png') }}" alt="MG Image" />
         </div>
-        
         <!-- Form Section -->
         <div class="flex items-center justify-center p-6 sm:p-12 sm:w-full sm:max-w-none md:w-1/2 max-w-md mx-auto">
             <div class="w-full">
