@@ -12,9 +12,9 @@
                     <form wire:submit.prevent="save">
                         @csrf
                         <label class="block text-sm">
-                            <span class="text-slate-700 font-bold">Employee ID <span class="text-red-700">*</span></span>
-                            <x-input class="appearance-none" wire:model="employeeId" :type="__('number')" :placeholder="__('0000')"/>
-                            @error('employeeId') <x-input-error :messages="__($message)" /> @enderror
+                            <span class="text-slate-700 font-bold">Username <span class="text-red-700">*</span></span>
+                            <x-input class="appearance-none" wire:model="username" :placeholder="__('juandelacruz')"/>
+                            @error('username') <x-input-error :messages="__($message)" /> @enderror
                         </label>
                         <!-- Password Input -->
                         <label class="block mt-4 text-sm">

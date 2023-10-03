@@ -6,11 +6,11 @@ use Livewire\Component;
 
 class Login extends Component
 {
-    public $employeeId,$password;
+    public $username,$password;
     protected function rules()
     {
         return [
-            'employeeId' => 'required|integer',
+            'username' => 'required|integer',
             'password' => 'required',
         ];
     }
@@ -20,7 +20,7 @@ class Login extends Component
     }
     public function save(){
         $this->validate();
-        dd($this->validate());
+        // dd($this->validate());
     }
 
 }
