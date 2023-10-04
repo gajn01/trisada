@@ -2,7 +2,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="row">
+        <div class="row login-form">
             <div class="d-flex col-12 col-lg-6 justify-content-center">
                 <img src="../img/big.png" width="300" height="150" class="img-fluid i" alt="">
             </div>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn secondary-bg w-100 cta-color" wire:click="login">Log In</button>
+                        <button type="submit" class="btn accent-bg w-100 cta-color" wire:click="login">Log In</button>
                     </div>
                 </form>
                 <!-- Session Status -->

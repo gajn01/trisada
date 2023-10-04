@@ -8,22 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Driver extends Model
 {
     use HasFactory;
+    protected $table ='tbl_driver_details';
     protected $fillable = [
-        'firstname',
-        'midname',
-        'lastname',
-        'contact_no',
-        'img',
-        'address',
-        'age',
-        'birthday',
+        'user_id',
         'driver_license',
         'plate_number',
         'franchise_no',
         'register_number',
         'or_cr',
-        'username',
-        'password',
         'toda_id',
     ];
 

@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('toda_name');
             $table->text('toda_desc')->nullable();
             $table->string('toda_brgy')->nullable();
-            $table->string('toda_city')->nullable();
-            $table->string('toda_province')->nullable();
             $table->timestamps(); 
         });
     }

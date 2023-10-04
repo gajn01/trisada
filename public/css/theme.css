@@ -28,6 +28,10 @@
 .cta-color{
     color: var(--cta-color) !important;
 }
+.accent-bg{
+    background-color: rgb(148 163 184) !important;
+
+}
 .icon {
     background-color: transparent;
     color: #790000;

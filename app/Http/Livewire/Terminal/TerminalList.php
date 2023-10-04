@@ -5,16 +5,12 @@ use Illuminate\Database\QueryException;
 use Livewire\WithPagination;
 use App\Traits\Sortable;
 use App\Helpers\UIHelper;
-use Illuminate\Support\Facades\Gate;
+use App\Models\Terminal;
+use App\Models\Toda;
 use Livewire\Component;
 
-/* model */
-use App\Models\Toda;
-use App\Models\Terminal;
-
-
 class TerminalList extends Component
-{  
+{
     use WithPagination, Sortable;
     protected $paginationTheme = 'bootstrap';
     public $displaypage = 10;
@@ -22,41 +18,39 @@ class TerminalList extends Component
     public $isedit = false;
     public Terminal $terminal;
     public $todaList;
-    protected function rules()
+    public $toda_id;
+    public function render()
+    {
+        $terminalList = $this->getDataList();
+        return view('livewire.terminal.terminal-list',['terminalList'=>$terminalList]);
+    }
+     protected function rules()
     {
         return [
-            'terminal.toda_id' => 'required|integer',
+            'terminal.toda_id' => 'required',
             'terminal.terminal_name' => 'required|string',
             'terminal.terminal_address' => 'required|string',
+            'terminal.terminal_long' => 'required|string',
+            'terminal.terminal_lat' => 'required|string',
         ];
     }
     public function mount(){
-        $this->todaList = $this->getTodaList();
         $this->terminal = new Terminal;
-        // dd(auth()->user()->toda_id);
-        if(auth()->user()->user_type == 1 ){
-            $this->terminal->toda_id = auth()->user()->toda_id;
-        }
+        $this->todaList = Toda::get();
     }
-    public function render()
-    {   
-        $terminalList = $this->getTerminalList();
-        return view('livewire.terminal.terminal-list',['terminalList' => $terminalList]);
-    }
-    public function getTodaList(){
-        return Toda::get();
-    }
-    public function getTerminalList(){
+   
+    public function getDataList(){
         return Terminal::where(function ($query){
              $query->where('terminal_name', 'like', '%' . $this->search . '%');
         })
-        ->when(auth()->user()->user_type != 0 ,function ($query){
-            $query->where('toda_id', auth()->user()->toda_id);
-        })
+      /*   ->when(auth()->user()->user_type != 0 ,function ($query){
+            $query->find(auth()->user()->toda_id);
+        }) */
         ->paginate($this->displaypage);
     }
     public function onCancel(){
         $this->resetValidation();
+        $this->terminal = new Terminal;
         $this->isedit = false;
     }
     public function onSave(){
@@ -69,9 +63,9 @@ class TerminalList extends Component
             $this->emit('close-modal');
             $this->resetValidation();
             if($this->isedit){
-                UIHelper::flashMessage($this, 'Update Successful', 'Terminal Updated', 'text-success');
+                UIHelper::flashMessage($this, 'Update Successful', 'Toda Updated', 'text-success');
             }else{
-                UIHelper::flashMessage($this, 'Create Successful', 'Add Terminal', 'text-success');
+                UIHelper::flashMessage($this, 'Create Successful', 'Add Toda', 'text-success');
             }
         } catch (QueryException $e) {
             UIHelper::flashMessage($this, 'Error', $e->getMessage(), 'text-danger');
@@ -84,7 +78,7 @@ class TerminalList extends Component
     public function onDelete(){
         try {
             $this->terminal->delete();
-            UIHelper::flashMessage($this, 'Delete Successful', 'Terminal deleted.', 'text-success');
+            UIHelper::flashMessage($this, 'Delete Successful', 'Toda deleted.', 'text-success');
         } catch (QueryException $e) {
             UIHelper::flashMessage($this, 'Error', $e->getMessage(), 'text-danger');
         }

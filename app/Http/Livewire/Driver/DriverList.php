@@ -2,105 +2,158 @@
 
 namespace App\Http\Livewire\Driver;
 
-use App\Models\Driver as DriverModels;
-use App\Models\Department as DepartmentModels;
-use Livewire\Component;
 use Illuminate\Database\QueryException;
 use Livewire\WithPagination;
 use App\Traits\Sortable;
 use App\Helpers\UIHelper;
-use Illuminate\Support\Facades\Gate;
+use Livewire\Component;
+use App\Models\Driver;
+use App\Models\UserAccount;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Http;
 
 class DriverList extends Component
 {
-    use WithPagination, Sortable;
+    use WithPagination, Sortable, WithFileUploads;
     protected $paginationTheme = 'bootstrap';
-    public $driver_id;
     public $displaypage = 10;
     public $search = '';
-    public $isedit = false;
-    public $department_list;
-    public $is_logistic = false;
-    public DriverModels $drivers;
+    public Driver $driver;
+    public UserAccount $user;
+    public $photo;
+    public $token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6IiIsInVzZXJuYW1lIjoic3VwZXJhZG1pbiIsImlhdCI6MTY5NjMyODkzMywiZXhwIjoxNzI3ODY0OTMzfQ.a_PViHssPWesB3_PRnFU8yWmH8mCJDCRRq-eh9bwErE';
     protected function rules()
     {
         return [
-            'drivers.name' => 'required|string|max:50',
-            'drivers.employee_id' => 'required|int',
-            'drivers.department_id' => 'required_if:is_logistic,false|nullable|int'
+            'user.user_id' => 'string',
+            'user.user_type' => 'string',
+            'user.firstname' => 'string',
+            'user.midname' => 'string',
+            'user.lastname' => 'string',
+            'user.contact_no' => 'integer',
+            'user.address' => 'string',
+            'user.email' => 'string',
+            'user.img' => 'string',
+            'user.age' => 'integer', // Assuming age is an integer.
+            'user.birthday' => 'date',
+            'user.username' => 'string', // Validate uniqueness in the 'users' table.
+            'user.password' => 'string|min:8', // Minimum 8 characters for the password.
+        /*     'driver.driver_license' => 'string',
+            'driver.plate_number' => 'string',
+            'driver.franchise_no' => 'string',
+            'driver.register_number' => 'string',
+            'driver.or_cr' => 'string',
+            'driver.toda_id' => 'integer', // Assuming toda_id is an integer. */
         ];
     }
-    protected $validationAttributes = [
-        'drivers.name' => 'Driver Name',
-        'drivers.employee_id' => 'Employee id',
-    ];
     public function mount()
     {
-        if (!Gate::allows('allow-view', 'module-driver-management')) redirect()->route('home');
-        $this->department_list = DepartmentModels::get();
-    }
-    private function initializeModel($isEdit)
-    {
-        $this->drivers = new DriverModels();
-        $this->isedit = $isEdit;
-    }
-    public function create()
-    {
-        $this->initializeModel(false);
-    }
-    public function cancel()
-    {
-        $this->resetValidation();
-        $this->initializeModel(false);
-    }
-    public function getId($id = null, $isedit = null)
-    {
-        $this->isedit = $isedit;
-        $this->driver_id = $id;
-        $this->drivers = DriverModels::findOrFail($id);
-        $this->is_logistic = $this->drivers->department_id ? false : true;
-    }
-    public function save()
-    {
-/*           if(!Gate::allows('allow-create','module-driver-management')){
-              UIHelper::flashMessage($this,'Action Cancelled','Unable to perform action due to user is unauthorized.','text-danger');
-              $this->emit('close-modal');
-              return;
-          } */
-        try {
-            $this->validate();
-            $this->drivers->created_by_id = auth()->user()->id;
-            $this->drivers->last_updated_by_id = auth()->user()->id;
-            $this->drivers->save();
-            UIHelper::flashMessage($this, 'Saving Successful', 'Driver details updated.', 'text-success');
-            $this->emit('close-modal');
-        } catch (QueryException $e) {
-            UIHelper::flashMessage($this, 'Error', $e->getMessage(), 'text-danger');
-            $this->emit('close-modal');
-        }
-    }
-    public function delete()
-    {
-        if(!Gate::allows('allow-delete','module-driver-management')){
-            UIHelper::flashMessage($this,'Action Cancelled','Unable to perform action due to user is unauthorized.','text-danger');
-            return;
-        }
-        $this->drivers->delete();
-        UIHelper::flashMessage($this, 'Delete Successful', 'Vehicle maintenance deleted.', 'text-success');
-    }
-    public function changeDepartment(){
-        $this->drivers->department_id = $this->is_logistic ? null : $this->drivers->department_id  ;
+        $this->user = new UserAccount;
+        $this->driver = new Driver;
     }
     public function render()
     {
-        $driver = DriverModels::where(function ($subQuery) {
-            $subQuery->where('name', 'like', '%' . $this->search . '%')
-                ->orWhere('employee_id', 'like', '%' . $this->search . '%');
+        $driverList = $this->getDataList();
+        return view('livewire.driver.driver-list',['driverList'=>$driverList]);
+    }
+    public function getDataList()
+    {
+        /* return Driver::where(function ($query) {
+            $query->where('terminal_name', 'like', '%' . $this->search . '%');
         })
-            ->when($this->sortdirection != '', function ($q) {
-                return $q->orderBy($this->sortby, $this->sortdirection);
-            })
-            ->paginate($this->displaypage);
-        return view('livewire.driver.driver-list', ['driver_list' => $driver]);
+        ->paginate($this->displaypage); */
+        return Driver::get();
+    }
+    public function onCancel()
+    {
+        $this->resetValidation();
+        $this->driver = new Driver;
+    }
+    public function onSave()
+    {
+        /* $this->validate([
+            'photo' => 'image|max:5024', // 1MB Max
+        ]);
+
+        $savedImage = $this->photo->store('img', 'public'); */
+
+        try {
+            $this->validate();
+            $this->user->uesr_id = 1;
+            $this->user->img = ' $savedImage ';
+            $this->user->created_at = now();
+            $this->user->updated_at = now();
+            $this->user->save();
+
+
+       /*      $this->driver->uesr_id = $id;
+            $this->driver->toda_id = 1;
+            $this->driver->created_at = now();
+            $this->driver->updated_at = now();
+            $this->driver->save(); */
+            // dd($this->user,$this->driver,$id);
+         
+
+            $this->emit('close-modal');
+            $this->resetValidation();
+            UIHelper::flashMessage($this, 'Register Successful', 'Added new driver', 'text-success');
+        } catch (QueryException $e) {
+            UIHelper::flashMessage($this, 'Error', $e->getMessage(), 'text-danger');
+        }
+        /* $data = [
+            [
+                'user_accounts' => [
+                    'firstname' => $this->user->firstname,
+                    'midname' => $this->user->midname,
+                    'lastname' => $this->user->lastname,
+                    'contact_no' => $this->user->contact_no,
+                    'img' => $savedImage,
+                    'address' => $this->user->address,
+                    'email' => $this->user->email,
+                    'age' => $this->user->age,
+                    'birthday' => $this->user->birthday,
+                    'username' => $this->user->username,
+                    'password' => $this->user->password,
+                ],
+                'driver_details' => [
+                    'driver_license' => $this->driver->driver_license,
+                    'plate_number' => $this->driver->plate_number,
+                    'franchise_no' => $this->driver->franchise_no,
+                    'register_number' => $this->driver->register_number,
+                    'or_cr' => $this->driver->or_cr,
+                    'toda_id' => $this->driver->toda_id ?? '',
+
+                ]
+            ]
+        ];
+        $response = Http::withHeaders([
+            'Authorization' => $this->token,
+            'Accept' => 'application/json', // Specify the desired content type
+        ])->POST('https://wild-rose-toad-robe.cyclic.cloud/driver', $data);
+
+        if ($response->successful()) {
+            // Handle the successful response, e.g., store data in a property
+            $apiData = $response->json();
+            dd($apiData);
+        } else {
+            // Handle errors or failed responses here
+            $errorMessage = 'Error: ' . $response->status();
+            dd($errorMessage);
+        } */
+
+        
+    }
+    public function onGetId($id)
+    {
+        $this->driver = Driver::findOrFail($id);
+    }
+    public function onDelete()
+    {
+        try {
+            $this->terminal->delete();
+            UIHelper::flashMessage($this, 'Delete Successful', 'Toda deleted.', 'text-success');
+        } catch (QueryException $e) {
+            UIHelper::flashMessage($this, 'Error', $e->getMessage(), 'text-danger');
+        }
     }
 }

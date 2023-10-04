@@ -168,7 +168,7 @@
                                 @enderror
                             </div>
                             <div class="mb-2">
-                                <label for="terminal_name" class="form-label ">Terminal Name<span
+                                <label for="terminal_name" class="form-label ">Name<span
                                         class="text-danger">*</span></label>
                                 <input id="terminal_name" name="terminal_name" wire:model.defer="terminal.terminal_name"
                                     type="text" class="form-control form-control-sm" required>
@@ -177,11 +177,29 @@
                                 @enderror
                             </div>
                             <div class="mb-2">
-                                <label for="terminal_address" class="form-label ">Terminal Address<span
+                                <label for="terminal_address" class="form-label ">Address<span
                                         class="text-danger">*</span></label>
                                 <textarea id="terminal_address" name="terminal_address" wire:model.defer="terminal.terminal_address" class="form-control"
                                     name="" id="" rows="3"></textarea>
                                 @error('terminal.terminal_address')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-2">
+                                <label for="terminal_long" class="form-label ">Longitude<span
+                                        class="text-danger">*</span></label>
+                                <input id="terminal_long" name="terminal_long" wire:model.defer="terminal.terminal_long"
+                                    type="text" class="form-control form-control-sm" required>
+                                @error('terminal.terminal_long')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-2">
+                                <label for="terminal_lat" class="form-label ">Latitude<span
+                                        class="text-danger">*</span></label>
+                                <input id="terminal_lat" name="terminal_lat" wire:model.defer="terminal.terminal_lat"
+                                    type="text" class="form-control form-control-sm" required>
+                                @error('terminal.terminal_lat')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

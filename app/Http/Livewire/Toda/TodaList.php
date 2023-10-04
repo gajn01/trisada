@@ -21,7 +21,7 @@ class TodaList extends Component
     {
         return [
             'toda.toda_name' => 'required|string',
-            'toda.toda_address' => 'required|string',
+            'toda.toda_brgy' => 'required|string',
         ];
     }
     public function mount(){
@@ -36,9 +36,9 @@ class TodaList extends Component
         return Toda::where(function ($query){
              $query->where('toda_name', 'like', '%' . $this->search . '%');
         })
-        ->when(auth()->user()->user_type != 0 ,function ($query){
+      /*   ->when(auth()->user()->user_type != 0 ,function ($query){
             $query->find(auth()->user()->toda_id);
-        })
+        }) */
         ->paginate($this->displaypage);
     }
     public function onCancel(){

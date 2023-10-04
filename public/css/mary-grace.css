@@ -1541,3 +1541,9 @@ textarea.form-control{
 .print-bg-gray {
     background-color:gainsboro;
 }
+.login-form{
+    background:  #F7C843;
+    padding: 4rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
