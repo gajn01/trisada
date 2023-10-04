@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Terminal extends Model
 {
     use HasFactory;
-    protected $table = 'tbl_terminal';
+    // protected $table = 'tbl_terminal';
     protected $fillable = [
         'toda_id',
         'terminal_name',

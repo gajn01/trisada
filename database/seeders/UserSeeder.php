@@ -11,7 +11,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'access_type' =>0,
+            'user_type' =>0,
             'firstname' => 'Super',
             'midname' => '',
             'lastname' => 'Admin',
@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'address' => '123 Main St',
             'age' => 0,
             'birthday' => '1993-06-15',
-            'email' => 'admin@example.com',
+            'email' => 'su@example.com',
             'username' => 'admin',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]);

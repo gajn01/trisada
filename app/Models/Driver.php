@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Driver extends Model
 {
     use HasFactory;
-    protected $table ='tbl_driver_details';
+    // protected $table ='tbl_driver_details';
     protected $fillable = [
         'user_id',
         'driver_license',

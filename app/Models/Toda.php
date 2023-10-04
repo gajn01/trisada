@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Toda extends Model
 {
     use HasFactory;
-    protected $table ='tbl_toda';
+    // protected $table ='tbl_toda';
 
     protected $fillable = [
         'toda_name',

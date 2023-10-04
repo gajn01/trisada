@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserAccount extends Model
 {
     use HasFactory;
-    protected $table ="tbl_user_accounts";
+    protected $table ="user_accounts";
     protected $fillable = [
         'user_id',
         'user_type',

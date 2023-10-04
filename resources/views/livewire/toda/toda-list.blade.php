@@ -151,7 +151,7 @@
                                 @enderror
                             </div>
                             <div class="mb-2">
-                                <label for="toda_brgy" class="form-label small">Toda Address<span
+                                <label for="toda_brgy" class="form-label small">Toda Barangay<span
                                         class="text-danger">*</span></label>
                                 <textarea id="toda_brgy" name="toda_brgy" wire:model.defer="toda.toda_brgy" class="form-control"
                                     name="" id="" rows="3"></textarea>
