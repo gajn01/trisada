@@ -11,6 +11,7 @@ use App\Models\Driver;
 use App\Models\User;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Hash;
 
 class DriverList extends Component
 {
@@ -74,18 +75,18 @@ class DriverList extends Component
         $this->validate([
             'photo' => 'image|max:5024', // 1MB Max
         ]);
-
         $savedImage = $this->photo->store('img', 'public');
         try {
-            $this->validate();
+            // $this->validate();
             $this->user->user_id = 1;
             $this->user->user_type = 2;
             $this->user->img = $savedImage ;
+            $this->user->password = Hash::make($this->user->password);
             $this->user->created_at = now();
             $this->user->updated_at = now();
             $id = $this->user->save();
 
-            $this->driver->uesr_id = $id;
+            $this->driver->user_id = $id;
             $this->driver->toda_id = 1;
             $this->driver->created_at = now();
             $this->driver->updated_at = now();

@@ -290,4 +290,41 @@
             </div>
         </div>
     </div>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="alertToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="" class="rounded me-2" alt="">
+                <strong class="me-auto">
+                    @if (session()->has('title'))
+                        <!-- Session Message -->
+                        <span class="{{ $class }}">{{ session('title') }}</span>
+                    @endif
+                </strong>
+                <small>
+                    @if (session()->has('timestamp'))
+                        {{ session('timestamp') }}
+                    @endif
+                </small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                @if (session()->has('message'))
+                    <!-- Session Message -->
+                    {{ session('message') }}
+                @endif
+            </div>
+        </div>
+    </div>
+    @push('custom-scripts')
+        <script>
+            window.livewire.on('close-modal', event => {
+                var modal = bootstrap.Modal.getInstance(document.getElementById('createModal'));
+                modal.hide();
+            });
+            window.livewire.on('show-toast', event => {
+                var toast = bootstrap.Toast.getOrCreateInstance(document.getElementById('alertToast'));
+                toast.show();
+            });
+        </script>
+    @endpush
 </div>
