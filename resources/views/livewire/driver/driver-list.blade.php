@@ -44,7 +44,7 @@
                 <table class="table app-table-hover mb-0 text-left">
                     <thead>
                         <tr>
-                           {{--  @if (auth()->user()->user_type == 0)
+                            {{--  @if (auth()->user()->user_type == 0)
                                 <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda_name')"
                                     href="#">Toda Name <x-column-sort direction="{{ $sortdirection }}"
                                         for="toda_name" currentsort="{{ $sortby }}" /> </a></th>
@@ -60,25 +60,25 @@
                     </thead>
                     <tbody>
                         @forelse ($driverList as $list)
-                        <tr>
-                          {{--   @if (auth()->user()->user_type == 0)
+                            <tr>
+                                {{--   @if (auth()->user()->user_type == 0)
                                 <td class="cell d-none d-lg-table-cell"><span>{{ $list->toda->toda_name }}</span></td>
                             @endif --}}
-                            <td class="cell d-none d-lg-table-cell"><span>{{ $list->id }}</span></td>
-                            <td class="cell d-none d-lg-table-cell"><span>{{ $list->user_id }}</span></td>
-                            <td class="cell text-end">
-                                <a class="btn btn-link link-primary px-1" title="Update"
-                                    wire:click="onGetId({{ $list->id }},true)" data-bs-toggle="modal"
-                                    data-bs-target="#createModal">
-                                    <i class="fa-edit fa-solid"></i>
-                                </a>
-                                <a class="btn btn-link link-danger px-1" title="Delete" href="#"
-                                    wire:click="onGetId({{ $list->id }})" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal">
-                                    <i class="fa-trash fa-solid"></i>
-                                </a>
-                            </td>
-                        </tr>
+                                <td class="cell d-none d-lg-table-cell"><span>{{ $list->id }}</span></td>
+                                <td class="cell d-none d-lg-table-cell"><span>{{ $list->user_id }}</span></td>
+                                <td class="cell text-end">
+                                    <a class="btn btn-link link-primary px-1" title="Update"
+                                        wire:click="onGetId({{ $list->id }},true)" data-bs-toggle="modal"
+                                        data-bs-target="#createModal">
+                                        <i class="fa-edit fa-solid"></i>
+                                    </a>
+                                    <a class="btn btn-link link-danger px-1" title="Delete" href="#"
+                                        wire:click="onGetId({{ $list->id }})" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal">
+                                        <i class="fa-trash fa-solid"></i>
+                                    </a>
+                                </td>
+                            </tr>
                         @empty
                             <tr>
                                 <td class="text-danger text-center" colspan="4">NO DATA</td>
@@ -146,9 +146,8 @@
                                 <div class="col-sm-12 col-md-4">
                                     <label for="user.lastname" class="form-label">Last Name<span
                                             class="text-danger">*</span></label>
-                                    <input id="user.lastname" name="user.lastname"
-                                        wire:model.defer="user.lastname" type="text"
-                                        class="form-control form-control-sm" required>
+                                    <input id="user.lastname" name="user.lastname" wire:model.defer="user.lastname"
+                                        type="text" class="form-control form-control-sm" required>
                                     @error('user.lastname')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -157,17 +156,16 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
                                     <label for="user.birthday" class="form-label">Birthday</label>
-                                    <input id="user.birthday" name="user.birthday"
-                                        wire:model.defer="user.birthday" type="date"
-                                        class="form-control form-control-sm">
+                                    <input id="user.birthday" name="user.birthday" wire:model.defer="user.birthday"
+                                        type="date" class="form-control form-control-sm">
                                     @error('user.birthday')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <label for="user.age" class="form-label">Age</label>
-                                    <input id="user.age" name="user.age" wire:model.defer="user.age"
-                                        type="number" class="form-control form-control-sm">
+                                    <input id="user.age" name="user.age" wire:model.defer="user.age" type="number"
+                                        class="form-control form-control-sm">
                                     @error('user.age')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -175,45 +173,41 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
-                                        <label for="user.contact_no" class="form-label">Contact Number<span
-                                                class="text-danger">*</span></label>
-                                        <input id="user.contact_no" name="user.contact_no"
-                                            wire:model.defer="user.contact_no" type="number"
-                                            class="form-control form-control-sm" required>
-                                        @error('user.contact_no')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                    <label for="user.contact_no" class="form-label">Contact Number<span
+                                            class="text-danger">*</span></label>
+                                    <input id="user.contact_no" name="user.contact_no"
+                                        wire:model.defer="user.contact_no" type="number"
+                                        class="form-control form-control-sm" required>
+                                    @error('user.contact_no')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <label for="user.email" class="form-label">Email Address<span
-                                        class="text-danger">*</span></label>
-                                <input id="user.email" name="user.email"
-                                    wire:model.defer="user.email" type="email"
-                                    class="form-control form-control-sm" required>
-                                @error('user.email')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                            class="text-danger">*</span></label>
+                                    <input id="user.email" name="user.email" wire:model.defer="user.email"
+                                        type="email" class="form-control form-control-sm" required>
+                                    @error('user.email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-12">
-                                        <label for="user.address" class="form-label">Address</label>
-                                        <textarea id="user.address" name="user.address" wire:model.defer="user.address"
-                                            class="form-control form-control-sm" rows="3"></textarea>
-                                        @error('user.address')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                    <label for="user.address" class="form-label">Address</label>
+                                    <textarea id="user.address" name="user.address" wire:model.defer="user.address" class="form-control form-control-sm"
+                                        rows="3"></textarea>
+                                    @error('user.address')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-2">
-                             {{--    <label for="user.img" class="form-label">Image</label>
-                                <input id="user.img" name="user.img" wire:model.defer="user.img"
-                                    type="text" class="form-control form-control-sm">
-                                @error('user.img')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
+                                <label for="user.img" class="form-label">Image</label>
                                 <input type="file" wire:model="photo">
-                                @error('photo') <span class="error">{{ $message }}</span> @enderror
+                                @error('photo')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
                             </div>
                             <label class="fw-bold" for="">Driver`s Information</label>
                             <hr />
@@ -270,9 +264,8 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
                                     <label for="user.username" class="form-label">Username</label>
-                                    <input id="user.username" name="user.username"
-                                        wire:model.defer="user.username" type="text"
-                                        class="form-control form-control-sm">
+                                    <input id="user.username" name="user.username" wire:model.defer="user.username"
+                                        type="text" class="form-control form-control-sm">
                                     @error('user.username')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -297,5 +290,4 @@
             </div>
         </div>
     </div>
-
 </div>

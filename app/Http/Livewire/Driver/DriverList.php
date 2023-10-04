@@ -8,7 +8,7 @@ use App\Traits\Sortable;
 use App\Helpers\UIHelper;
 use Livewire\Component;
 use App\Models\Driver;
-use App\Models\UserAccount;
+use App\Models\User;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Http;
 
@@ -19,7 +19,7 @@ class DriverList extends Component
     public $displaypage = 10;
     public $search = '';
     public Driver $driver;
-    public UserAccount $user;
+    public User $user;
     public $photo;
     public $token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6IiIsInVzZXJuYW1lIjoic3VwZXJhZG1pbiIsImlhdCI6MTY5NjMyODkzMywiZXhwIjoxNzI3ODY0OTMzfQ.a_PViHssPWesB3_PRnFU8yWmH8mCJDCRRq-eh9bwErE';
     protected function rules()
@@ -38,17 +38,17 @@ class DriverList extends Component
             'user.birthday' => 'date',
             'user.username' => 'string', // Validate uniqueness in the 'users' table.
             'user.password' => 'string|min:8', // Minimum 8 characters for the password.
-        /*     'driver.driver_license' => 'string',
+            'driver.driver_license' => 'string',
             'driver.plate_number' => 'string',
             'driver.franchise_no' => 'string',
             'driver.register_number' => 'string',
             'driver.or_cr' => 'string',
-            'driver.toda_id' => 'integer', // Assuming toda_id is an integer. */
+            'driver.toda_id' => 'integer', // Assuming toda_id is an integer.
         ];
     }
     public function mount()
     {
-        $this->user = new UserAccount;
+        $this->user = new User;
         $this->driver = new Driver;
     }
     public function render()
@@ -71,26 +71,25 @@ class DriverList extends Component
     }
     public function onSave()
     {
-        /* $this->validate([
+        $this->validate([
             'photo' => 'image|max:5024', // 1MB Max
         ]);
 
-        $savedImage = $this->photo->store('img', 'public'); */
-
+        $savedImage = $this->photo->store('img', 'public');
         try {
             $this->validate();
-            $this->user->uesr_id = 1;
-            $this->user->img = ' $savedImage ';
+            $this->user->user_id = 1;
+            $this->user->user_type = 2;
+            $this->user->img = $savedImage ;
             $this->user->created_at = now();
             $this->user->updated_at = now();
-            $this->user->save();
+            $id = $this->user->save();
 
-
-       /*      $this->driver->uesr_id = $id;
+            $this->driver->uesr_id = $id;
             $this->driver->toda_id = 1;
             $this->driver->created_at = now();
             $this->driver->updated_at = now();
-            $this->driver->save(); */
+            $this->driver->save();
             // dd($this->user,$this->driver,$id);
          
 
@@ -140,8 +139,6 @@ class DriverList extends Component
             $errorMessage = 'Error: ' . $response->status();
             dd($errorMessage);
         } */
-
-        
     }
     public function onGetId($id)
     {
