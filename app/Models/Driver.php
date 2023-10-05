@@ -19,4 +19,16 @@ class Driver extends Model
         'toda_id',
     ];
 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id','id');
+    }
+
+    public function toda()
+    {
+        return $this->belongsTo(Toda::class,'toda_id','id');
+    }
+
+
 }

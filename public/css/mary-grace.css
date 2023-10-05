@@ -747,11 +747,10 @@ textarea.form-control{
 .app-footer 
 .copyright {
     font-size: .8125rem;
-    position: absolute;
+/*     position: absolute;
     bottom: 20px;
-    transform: translateX(-50%); /* Adjust for element width */
-    width: 50%;
-    text-align: center; /* Center-align text within the element */
+    transform: translateX(-50%); 
+    text-align: center;  */
 }
 
 

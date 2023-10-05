@@ -49,12 +49,18 @@
                                     href="#">Toda Name <x-column-sort direction="{{ $sortdirection }}"
                                         for="toda_name" currentsort="{{ $sortby }}" /> </a></th>
                             @endif --}}
-                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda_name')"
-                                    href="#">Terminal Name <x-column-sort direction="{{ $sortdirection }}"
-                                        for="terminal_name" currentsort="{{ $sortby }}" /> </a></th>
-                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('terminal_address')"
-                                    href="#">Terminal Address <x-column-sort direction="{{ $sortdirection }}"
-                                        for="toda_address" currentsort="{{ $sortby }}" /></a></th>
+                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('id')"href="#">ID
+                                    <x-column-sort direction="{{ $sortdirection }}" for="terminal_name"
+                                        currentsort="{{ $sortby }}" /> </a></th>
+                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('name')" href="#">Name
+                                    <x-column-sort direction="{{ $sortdirection }}" for="name"
+                                        currentsort="{{ $sortby }}" /></a></th>
+                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda')" href="#">Toda
+                                    <x-column-sort direction="{{ $sortdirection }}" for="name"
+                                        currentsort="{{ $sortby }}" /></a></th>
+                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('status')" href="#">Status
+                                    <x-column-sort direction="{{ $sortdirection }}" for="name"
+                                        currentsort="{{ $sortby }}" /></a></th>
                             <th class="cell"></th>
                         </tr>
                     </thead>
@@ -65,11 +71,12 @@
                                 <td class="cell d-none d-lg-table-cell"><span>{{ $list->toda->toda_name }}</span></td>
                             @endif --}}
                                 <td class="cell d-none d-lg-table-cell"><span>{{ $list->id }}</span></td>
+                                <td class="cell d-none d-lg-table-cell"><span>{{ $list->user->firstname }}</span></td>
+                                <td class="cell d-none d-lg-table-cell"><span>{{ $list->toda->toda_name }}</span></td>
                                 <td class="cell d-none d-lg-table-cell"><span>{{ $list->user_id }}</span></td>
                                 <td class="cell text-end">
                                     <a class="btn btn-link link-primary px-1" title="Update"
-                                        wire:click="onGetId({{ $list->id }},true)" data-bs-toggle="modal"
-                                        data-bs-target="#createModal">
+                                        href="{{ route('driver-details', ['id' => $list->id]) }}">
                                         <i class="fa-edit fa-solid"></i>
                                     </a>
                                     <a class="btn btn-link link-danger px-1" title="Delete" href="#"
@@ -202,13 +209,18 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="mb-2">
-                                <label for="user.img" class="form-label">Image</label>
-                                <input type="file" wire:model="photo">
-                                @error('photo')
-                                    <span class="error">{{ $message }}</span>
-                                @enderror
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    <div class="mb-2 ">
+                                        <label for="user.img" class="form-label">Image</label>
+                                        <input type="file" wire:model="photo">
+                                        @error('photo')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
+
                             <label class="fw-bold" for="">Driver`s Information</label>
                             <hr />
                             <div class="row">
@@ -290,6 +302,29 @@
             </div>
         </div>
     </div>
+    <!-- Delete Modal -->
+    <div wire:ignore class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Delete Driver</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="">
+                        Do you want to delete selected record?
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" wire:click="onDelete" class="btn btn-danger text-light"
+                        data-bs-dismiss="modal">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         <div id="alertToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">

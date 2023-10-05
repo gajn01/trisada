@@ -39,6 +39,7 @@ class DriverList extends Component
             'user.birthday' => 'date',
             'user.username' => 'string', // Validate uniqueness in the 'users' table.
             'user.password' => 'string|min:8', // Minimum 8 characters for the password.
+            'user.status' => 'int', // Minimum 8 characters for the password.
             'driver.driver_license' => 'string',
             'driver.plate_number' => 'string',
             'driver.franchise_no' => 'string',
@@ -81,6 +82,7 @@ class DriverList extends Component
             $this->user->user_id = 1;
             $this->user->user_type = 2;
             $this->user->img = $savedImage ;
+            $this->user->status = 1 ;
             $this->user->password = Hash::make($this->user->password);
             $this->user->created_at = now();
             $this->user->updated_at = now();
@@ -148,7 +150,7 @@ class DriverList extends Component
     public function onDelete()
     {
         try {
-            $this->terminal->delete();
+            $this->driver->delete();
             UIHelper::flashMessage($this, 'Delete Successful', 'Toda deleted.', 'text-success');
         } catch (QueryException $e) {
             UIHelper::flashMessage($this, 'Error', $e->getMessage(), 'text-danger');

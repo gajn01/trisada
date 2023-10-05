@@ -52,7 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
        Route::get('/geocode', GeocodeComponent::class);
 });
 
-Route::get('/linkstorage', function () {
+/* Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
-});
+}); */
 require __DIR__ . '/auth.php';
