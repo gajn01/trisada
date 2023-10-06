@@ -1,9 +1,9 @@
 <div>
     <nav aria-label="breadcrumb" class="">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('driver-list') }}">Driver Management</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Driver Detail</li>
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin-list') }}">Toda Admin Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Toda Admin Details</li>
         </ol>
     </nav>
     <div class="row g-3 mb-4 align-items-center justify-content-between">
@@ -33,7 +33,7 @@
                             <div class="col-sm-12 col-md-4">
                                 <div class="item-label"><strong>First Name</strong> </div>
                                 @if ($isedit == false)
-                                    <div class="item-data">{{ $driver->user->firstname ?? 'n/a' }}</div>
+                                    <div class="item-data">{{ $user->firstname ?? 'n/a' }}</div>
                                 @else
                                     <input wire:model.defer="user.firstname" type="text" class="form-control" required>
                                     @error('user.firstname')
@@ -44,7 +44,7 @@
                             <div class="col-sm-12 col-md-4">
                                 <div class="item-label"><strong>Middle Name</strong></div>
                                 @if ($isedit == false)
-                                    <div class="item-data">{{ $driver->user->midname ?? 'n/a' }}</div>
+                                    <div class="item-data">{{ $user->midname ?? 'n/a' }}</div>
                                 @else
                                     <input wire:model.defer="user.midname" type="text" class="form-control" required>
                                     @error('user.midname')
@@ -55,7 +55,7 @@
                             <div class="col-sm-12 col-md-4">
                                 <div class="item-label"><strong>Last Name</strong></div>
                                 @if ($isedit == false)
-                                    <div class="item-data">{{ $driver->user->lastname ?? 'n/a' }}</div>
+                                    <div class="item-data">{{ $user->lastname ?? 'n/a' }}</div>
                                 @else
                                     <input wire:model.defer="user.lastname" type="text" class="form-control" required>
                                     @error('user.lastname')
@@ -70,7 +70,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="item-label"><strong>Birthday</strong> </div>
                                 @if ($isedit == false)
-                                    <div class="item-data">{{ $driver->user->birthday ?? 'n/a' }}</div>
+                                    <div class="item-data">{{ $user->birthday ?? 'n/a' }}</div>
                                 @else
                                     <input wire:model.defer="user.birthday" type="date" class="form-control" required>
                                     @error('user.birthday')
@@ -81,7 +81,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="item-label"><strong>Age</strong></div>
                                 @if ($isedit == false)
-                                    <div class="item-data">{{ $driver->user->age ?? 'n/a' }}</div>
+                                    <div class="item-data">{{ $user->age ?? 'n/a' }}</div>
                                 @else
                                     <input wire:model.defer="user.age" type="number" class="form-control" required>
                                     @error('user.age')
@@ -96,7 +96,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="item-label"><strong>Contact No.</strong> </div>
                                 @if ($isedit == false)
-                                    <div class="item-data">{{ $driver->user->contact_no ?? 'n/a' }}</div>
+                                    <div class="item-data">{{ $user->contact_no ?? 'n/a' }}</div>
                                 @else
                                     <input wire:model.defer="user.contact_no" type="number" class="form-control" required>
                                     @error('user.contact_no')
@@ -107,7 +107,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="item-label"><strong>Email Address</strong></div>
                                 @if ($isedit == false)
-                                    <div class="item-data">{{ $driver->user->email ?? 'n/a' }}</div>
+                                    <div class="item-data">{{ $user->email ?? 'n/a' }}</div>
                                 @else
                                     <input wire:model.defer="user.email" type="text" class="form-control" required>
                                     @error('user.email')
@@ -122,7 +122,7 @@
                             <div class="col-12">
                                 <div class="item-label"><strong>Home Address.</strong> </div>
                                 @if ($isedit == false)
-                                    <div class="item-data">{{ $driver->user->address ?? 'n/a' }}</div>
+                                    <div class="item-data">{{ $user->address ?? 'n/a' }}</div>
                                 @else
                                     <textarea id="user.address" name="user.address" wire:model.defer="user.address" class="form-control form-control-sm"
                                     rows="3"></textarea>
@@ -131,94 +131,22 @@
                                     @enderror
                                 @endif
                             </div>
-                        
-                        </div>
-                    </div>
-                </div><!--//app-card-body-->
-            </div><!--//app-card-->
-        </div>
-    </div>
-    <hr class="my-4">
-    <div class="row g-4 settings-section">
-        <div class="col-12 col-md-4">
-            <h3 class="section-title">Driver </h3>
-            <div class="section-intro">Driver information.</div>
-        </div>
-        <div class="col-12 col-md-8">
-            <div class="app-card app-card-settings shadow-sm p-4">
-                <div class="app-card-body">
-                    <div class="item border-bottom py-3">
-                        <div class="row justify-content-between align-items-center">
-                            <div class="col-sm-12 col-md-4">
-                                <div class="item-label"><strong>Driver License</strong> </div>
-                                @if ($isedit == false)
-                                    <div class="item-data">{{ $driver->driver_license }}</div>
-                                @else
-                                    <input wire:model.defer="driver.driver_license" type="text" class="form-control" required>
-                                    @error('driver.driver_license')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                @endif
-                            </div>
-                            <div class="col-sm-12 col-md-4">
-                                <div class="item-label"><strong>Plate Number</strong></div>
-                                @if ($isedit == false)
-                                    <div class="item-data">{{ $driver->plate_number ?? 'n/a' }}</div>
-                                @else
-                                    <input wire:model.defer="driver.plate_number" type="text" class="form-control" required>
-                                    @error('driver.plate_number')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                @endif
-                            </div>
-                            <div class="col-sm-12 col-md-4">
-                                <div class="item-label"><strong>Franchise Number</strong></div>
-                                @if ($isedit == false)
-                                    <div class="item-data">{{ $driver->franchise_no ?? 'n/a' }}</div>
-                                @else
-                                    <input wire:model.defer="driver.franchise_no" type="text" class="form-control" required>
-                                    @error('driver.franchise_no')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                @endif
-                            </div>
                         </div>
                     </div>
                     <div class="item border-bottom py-3">
                         <div class="row justify-content-between align-items-center">
-                            <div class="col-sm-12 col-md-4">
-                                <div class="item-label"><strong>Register Number</strong> </div>
-                                @if ($isedit == false)
-                                    <div class="item-data">{{ $driver->register_number ?? 'n/a' }}</div>
-                                @else
-                                    <input wire:model.defer="driver.register_number" type="text" class="form-control" required>
-                                    @error('driver.register_number')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                @endif
-                            </div>
-                            <div class="col-sm-12 col-md-4">
-                                <div class="item-label"><strong>OR/CR</strong></div>
-                                @if ($isedit == false)
-                                    <div class="item-data">{{ $driver->or_cr ?? 'n/a' }}</div>
-                                @else
-                                    <input wire:model.defer="driver.or_cr" type="text" class="form-control" required>
-                                    @error('driver.or_cr')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                @endif
-                            </div>
-                            <div class="col-sm-12 col-md-4">
-                                <div class="item-label"><strong>Toda</strong></div>
-                                <div class="item-data">{{ $driver->toda->toda_name ?? 'n/a' }}</div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="item-label"><strong>Toda Name</strong> </div>
+                                <div class="item-data">{{ $user->toda->toda_name ?? 'n/a' }}</div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div><!--//app-card-body-->
-
-        </div><!--//app-card-->
+            </div>
+        </div>
     </div>
+    <hr class="my-4">
+ 
     <div wire:ignore class="modal fade" id="confirmOverride" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="confirmOverrideLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Driver;
 use App\Models\Driver;
 use App\Models\User;
 use Livewire\Component;
+use App\Helpers\UIHelper;
+use Illuminate\Database\QueryException;
 
 class DriverDetails extends Component
 {
@@ -27,7 +29,6 @@ class DriverDetails extends Component
             'user.age' => 'integer', // Assuming age is an integer.
             'user.birthday' => 'date',
             'user.username' => 'string', // Validate uniqueness in the 'users' table.
-            'user.password' => 'string|min:8', // Minimum 8 characters for the password.
             'user.status' => 'int', // Minimum 8 characters for the password.
             'driver.driver_license' => 'string',
             'driver.plate_number' => 'string',
@@ -53,8 +54,20 @@ class DriverDetails extends Component
     public function getUserDetails(){
         return User::find($this->driver->user_id);
     }
-
     public function onUpdateOrCancel(){
         $this->isedit = !$this->isedit;
+    }
+    public function onSave(){
+        try {
+            $this->user->save();
+            $this->driver->save();
+            $this->driver->refresh();
+            $this->user->refresh();
+            $this->onUpdateOrCancel();
+            UIHelper::flashMessage($this, 'Update Successful', 'Update Driver Details', 'text-success');
+        } catch (QueryException $e) {
+            UIHelper::flashMessage($this, 'Error', $e->getMessage(), 'text-danger');
+        }
+
     }
 }

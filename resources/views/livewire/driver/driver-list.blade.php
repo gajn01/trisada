@@ -75,9 +75,9 @@
                                 <td class="cell d-none d-lg-table-cell"><span>{{ $list->toda->toda_name }}</span></td>
                                 <td class="cell d-none d-lg-table-cell"><span>{{ $list->user_id }}</span></td>
                                 <td class="cell text-end">
-                                    <a class="btn btn-link link-primary px-1" title="Update"
+                                    <a class="btn btn-link link-primary px-1" title="View"
                                         href="{{ route('driver-details', ['id' => $list->id]) }}">
-                                        <i class="fa-edit fa-solid"></i>
+                                        <i class="fa-eye fa-solid"></i>
                                     </a>
                                     <a class="btn btn-link link-danger px-1" title="Delete" href="#"
                                         wire:click="onGetId({{ $list->id }})" data-bs-toggle="modal"

@@ -10,8 +10,9 @@ use Livewire\Component;
 use App\Models\Driver;
 use App\Models\User;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Facades\Http;
 
 class DriverList extends Component
 {

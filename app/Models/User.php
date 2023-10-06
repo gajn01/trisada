@@ -31,6 +31,7 @@ class User extends Authenticatable
         'email',
         'username',
         'password',
+        'toda_id',
     ];
 
     /**
@@ -52,8 +53,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function departments(){
-        return $this->belongsToMany(Department::class);
+    public function toda(){
+        return $this->belongsTo(Toda::class);
     }
 
     public function getUserLevelAttribute()

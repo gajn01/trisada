@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\NavigationController;
+use App\Http\Livewire\Admin\AdminDetails;
+use App\Http\Livewire\Admin\AdminList;
 use App\Http\Livewire\Customer\CustomerDetails;
 use App\Http\Livewire\Driver\DriverDetails;
 use App\Http\Livewire\GeocodeComponent;
@@ -46,7 +48,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
        Route::get('customer', CustomerList::class)->name('customer-list');
        Route::get('customer/{id}', CustomerDetails::class)->name('customer-details');
 
-       Route::get('user', UserList::class)->name('user-list');
+       Route::get('admin', AdminList::class)->name('admin-list');
+       Route::get('admin/{id}', AdminDetails::class)->name('admin-details');
 
 
        Route::get('/geocode', GeocodeComponent::class);
