@@ -15,7 +15,7 @@ class GeocodeComponent extends Component
     {
         $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
             'address' => $this->address,
-            'key' => 'AIzaSyBNMl4BczTuNsxGnImHOGIo-xDWEs5-9U0', // Replace with your API key
+            'key' => 'AIzaSyDhhoTzc--O1Z0NOIYHBRxEOc-ONS36Xx4', // Replace with your API key
         ]);
 
         $data = $response->json();

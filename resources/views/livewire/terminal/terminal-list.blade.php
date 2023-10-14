@@ -5,8 +5,6 @@
             <li class="breadcrumb-item active" aria-current="page">Terminal Management</li>
         </ol>
     </nav>
-
- 
     <div class="row g-3 mb-4 align-items-center justify-content-between">
         <div class="col-auto">
             <h1 class="app-page-title mb-0">Terminal Management</h1>
@@ -48,8 +46,8 @@
                         <tr>
                             @if (auth()->user()->user_type == 0)
                                 <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda_name')"
-                                    href="#">Toda Name <x-column-sort direction="{{ $sortdirection }}"
-                                        for="toda_name" currentsort="{{ $sortby }}" /> </a></th>
+                                        href="#">Toda Name <x-column-sort direction="{{ $sortdirection }}"
+                                            for="toda_name" currentsort="{{ $sortby }}" /> </a></th>
                             @endif
                             <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda_name')"
                                     href="#">Terminal Name <x-column-sort direction="{{ $sortdirection }}"
@@ -62,29 +60,30 @@
                     </thead>
                     <tbody>
                         @forelse ($terminalList as $list)
-                        <tr>
-                            @if (auth()->user()->user_type == 0)
-                                <td class="cell d-none d-lg-table-cell"><span>{{ $list->toda->toda_name }}</span></td>
-                            @endif
-                            <td class="cell d-none d-lg-table-cell"><span>{{ $list->terminal_name }}</span></td>
-                            <td class="cell d-none d-lg-table-cell"><span>{{ $list->terminal_address }}</span></td>
-                            <td class="cell text-end">
-                                @if (Gate::allows('allow-edit', 'module-driver-management'))
-                                    <a class="btn btn-link link-primary px-1" title="Update"
-                                        wire:click="onGetId({{ $list->id }},true)" data-bs-toggle="modal"
-                                        data-bs-target="#createModal">
-                                        <i class="fa-edit fa-solid"></i>
-                                    </a>
+                            <tr>
+                                @if (auth()->user()->user_type == 0)
+                                    <td class="cell d-none d-lg-table-cell"><span>{{ $list->toda->toda_name }}</span>
+                                    </td>
                                 @endif
-                                @if (Gate::allows('allow-delete', 'module-driver-management'))
-                                    <a class="btn btn-link link-danger px-1" title="Delete" href="#"
-                                        wire:click="onGetId({{ $list->id }})" data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal">
-                                        <i class="fa-trash fa-solid"></i>
-                                    </a>
-                                @endif
-                            </td>
-                        </tr>
+                                <td class="cell d-none d-lg-table-cell"><span>{{ $list->terminal_name }}</span></td>
+                                <td class="cell d-none d-lg-table-cell"><span>{{ $list->terminal_address }}</span></td>
+                                <td class="cell text-end">
+                                    @if (Gate::allows('allow-edit', 'module-driver-management'))
+                                        <a class="btn btn-link link-primary px-1" title="Update"
+                                            wire:click="onGetId({{ $list->id }},true)" data-bs-toggle="modal"
+                                            data-bs-target="#createModal">
+                                            <i class="fa-edit fa-solid"></i>
+                                        </a>
+                                    @endif
+                                    @if (Gate::allows('allow-delete', 'module-driver-management'))
+                                        <a class="btn btn-link link-danger px-1" title="Delete" href="#"
+                                            wire:click="onGetId({{ $list->id }})" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal">
+                                            <i class="fa-trash fa-solid"></i>
+                                        </a>
+                                    @endif
+                                </td>
+                            </tr>
                         @empty
                             <tr>
                                 <td class="text-danger text-center" colspan="4">NO DATA</td>
@@ -118,28 +117,26 @@
     <!--//app-pagination-->
     <!-- Delete Modal -->
     <div wire:ignore class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false"
-    tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title">Delete Terminal</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="">
-                    Do you want to delete selected record?
+        tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Delete Terminal</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" wire:click="onDelete" class="btn btn-danger text-light"
-                    data-bs-dismiss="modal">Delete</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="modal-body">
+                    <div class="">
+                        Do you want to delete selected record?
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" wire:click="onDelete" class="btn btn-danger text-light"
+                        data-bs-dismiss="modal">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-
     <!-- Create Modal -->
     <div wire:ignore.self class="modal fade" id="createModal" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
@@ -156,11 +153,12 @@
                         <div class="settings-form">
                             <div class="mb-2  d-flex flex-column">
                                 <label for="toda_id" class="form-label">Toda</label>
-                                <select name="toda_id" id="toda_id" class="form-select form-select-md  d-inline-flex w-auto" wire:model="terminal.toda_id"
-                                @disabled(auth()->user()->user_type == 0 ? false : true)>
+                                <select name="toda_id" id="toda_id"
+                                    class="form-select form-select-md  d-inline-flex w-auto"
+                                    wire:model="terminal.toda_id" @disabled(auth()->user()->user_type == 0 ? false : true)>
                                     <option value hidden selected>--Select Toda--</option>
                                     @foreach ($todaList as $toda)
-                                        <option value="{{$toda->id}}">{{$toda->toda_name}}</option>
+                                        <option value="{{ $toda->id }}">{{ $toda->toda_name }}</option>
                                     @endforeach
                                 </select>
                                 @error('terminal.toda_id')
@@ -170,8 +168,9 @@
                             <div class="mb-2">
                                 <label for="terminal_name" class="form-label ">Name<span
                                         class="text-danger">*</span></label>
-                                <input id="terminal_name" name="terminal_name" wire:model.defer="terminal.terminal_name"
-                                    type="text" class="form-control form-control-sm" required>
+                                <input id="terminal_name" name="terminal_name"
+                                    wire:model.defer="terminal.terminal_name" type="text"
+                                    class="form-control form-control-sm" required>
                                 @error('terminal.terminal_name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -179,8 +178,8 @@
                             <div class="mb-2">
                                 <label for="terminal_address" class="form-label ">Address<span
                                         class="text-danger">*</span></label>
-                                <textarea id="terminal_address" name="terminal_address" wire:model.defer="terminal.terminal_address" class="form-control"
-                                    name="" id="" rows="3"></textarea>
+                                <textarea id="terminal_address" name="terminal_address" wire:model.defer="terminal.terminal_address"
+                                    class="form-control" name="" id="" rows="3"></textarea>
                                 @error('terminal.terminal_address')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -188,8 +187,9 @@
                             <div class="mb-2">
                                 <label for="terminal_long" class="form-label ">Longitude<span
                                         class="text-danger">*</span></label>
-                                <input id="terminal_long" name="terminal_long" wire:model.defer="terminal.terminal_long"
-                                    type="text" class="form-control form-control-sm" required>
+                                <input id="terminal_long" name="terminal_long"
+                                    wire:model.defer="terminal.terminal_long" type="text"
+                                    class="form-control form-control-sm" required>
                                 @error('terminal.terminal_long')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -207,8 +207,10 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" wire:click="onSave" class="btn btn-primary text-light">{{ $isedit ? 'Update' : 'Save' }} </button>
-                    <button type="button" wire:click="onCancel" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                    <button type="button" wire:click="onSave"
+                        class="btn btn-primary text-light">{{ $isedit ? 'Update' : 'Save' }} </button>
+                    <button type="button" wire:click="onCancel" class="btn btn-secondary" data-bs-dismiss="modal"
+                        aria-label="Close">Close</button>
                 </div>
             </div>
         </div>

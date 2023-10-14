@@ -365,7 +365,7 @@ textarea.form-control{
 }
 
 .app-notifications-dropdown .dropdown-menu .item {
-    min-width: 250px;
+    min-width: 300px;
     position: relative;
     border-bottom: 1px solid #e7e9ed
 }
@@ -426,7 +426,7 @@ textarea.form-control{
 
 @media(min-width: 1200px) {
     .app-header-inner {
-        margin-left: 250px
+        margin-left: 300px
     }
 }
 
@@ -497,9 +497,9 @@ textarea.form-control{
 .app-sidepanel .sidepanel-inner {
     position: relative;
     z-index: 10;
-    background: var(--secondary-color);
+    background: var(--bg-color);
     box-shadow: rgba(0, 0, 0, .05) 0px 8px 15px;
-    width: 250px;
+    width: 300px;
     height: 100%
 }
 
@@ -579,7 +579,9 @@ textarea.form-control{
     position: relative;
     display: block;
     padding-left: 3rem;
+    font-size: 1.3rem;
 }
+
 
 .app-nav .nav-link.active {
     /* color: var(--cta-color); */
@@ -651,7 +653,8 @@ textarea.form-control{
     padding-left: 1rem;
     position: relative;
     display: block;
-    margin-bottom: 0
+    margin-bottom: 0;
+    font-size: 1rem;
 }
 
 .app-nav .submenu-link:before {
@@ -731,7 +734,7 @@ textarea.form-control{
 
 @media(min-width: 1200px) {
     .app-wrapper {
-        margin-left: 250px
+        margin-left: 300px
     }
 }
 
@@ -1080,7 +1083,7 @@ textarea.form-control{
 }
 
 .app-card-orders-table .truncate {
-    max-width: 250px;
+    max-width: 300px;
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1541,7 +1544,7 @@ textarea.form-control{
     background-color:gainsboro;
 }
 .login-form{
-    background:  #F7C843;
+    background:  var(--bg-color);
     padding: 4rem;
     border-radius: 20px;
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);

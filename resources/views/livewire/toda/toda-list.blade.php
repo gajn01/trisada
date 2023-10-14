@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <!--//col-->
-                    @if (Gate::allows('allow-create', 'module-driver-management'))
+                    @if (auth()->user()->user_type == 0)
                         <div class="col-auto">
                             <a class="btn app-btn-primary" wire:click="onCancel" data-bs-toggle="modal"
                                 data-bs-target="#createModal" href="#">
@@ -46,12 +46,12 @@
                 <table class="table app-table-hover mb-0 text-left">
                     <thead>
                         <tr>
-                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda_name')"
-                                    href="#"> Name <x-column-sort direction="{{ $sortdirection }}"
-                                        for="toda_name" currentsort="{{ $sortby }}" /> </a></th>
-                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda_brgy')"
-                                    href="#"> Barangay <x-column-sort direction="{{ $sortdirection }}"
-                                        for="toda_brgy" currentsort="{{ $sortby }}" /></a></th>
+                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda_name')" href="#">
+                                    Name <x-column-sort direction="{{ $sortdirection }}" for="toda_name"
+                                        currentsort="{{ $sortby }}" /> </a></th>
+                            <th class="cell d-none d-lg-table-cell"><a wire:click="sort('toda_brgy')" href="#">
+                                    Barangay <x-column-sort direction="{{ $sortdirection }}" for="toda_brgy"
+                                        currentsort="{{ $sortby }}" /></a></th>
                             <th class="cell"></th>
                         </tr>
                     </thead>
@@ -61,6 +61,7 @@
                                 <td class="cell d-none d-lg-table-cell"><span>{{ $toda->toda_name }}</span></td>
                                 <td class="cell d-none d-lg-table-cell"><span>{{ $toda->toda_brgy }}</span></td>
                                 <td class="cell text-end">
+                                    @if (auth()->user()->user_type == 0)
                                         <a class="btn btn-link link-primary px-1" title="Update"
                                             wire:click="onGetId({{ $toda->id }},true)" data-bs-toggle="modal"
                                             data-bs-target="#createModal">
@@ -71,6 +72,8 @@
                                             data-bs-target="#deleteModal">
                                             <i class="fa-trash fa-solid"></i>
                                         </a>
+                                    @endif
+
                                 </td>
                             </tr>
                         @empty
@@ -126,14 +129,13 @@
             </div>
         </div>
     </div>
-
     <!-- Create Modal -->
     <div wire:ignore.self class="modal fade" id="createModal" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title">{{ $isedit ? 'Update' : 'Create'}} Toda</h6>
+                    <h6 class="modal-title">{{ $isedit ? 'Update' : 'Create' }} Toda</h6>
                     <button type="button" wire:click="onCancel" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
@@ -153,8 +155,8 @@
                             <div class="mb-2">
                                 <label for="toda_brgy" class="form-label small">Toda Barangay<span
                                         class="text-danger">*</span></label>
-                                <textarea id="toda_brgy" name="toda_brgy" wire:model.defer="toda.toda_brgy" class="form-control"
-                                    name="" id="" rows="3"></textarea>
+                                <textarea id="toda_brgy" name="toda_brgy" wire:model.defer="toda.toda_brgy" class="form-control" name=""
+                                    id="" rows="3"></textarea>
                                 @error('toda.toda_brgy')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -163,7 +165,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" wire:click="onSave" class="btn btn-primary text-light">{{ $isedit ? 'Update' : 'Save'}}</button>
+                    <button type="button" wire:click="onSave"
+                        class="btn btn-primary text-light">{{ $isedit ? 'Update' : 'Save' }}</button>
                     <button type="button" wire:click="onCancel" class="btn btn-secondary" data-bs-dismiss="modal"
                         aria-label="Close">Close</button>
                 </div>

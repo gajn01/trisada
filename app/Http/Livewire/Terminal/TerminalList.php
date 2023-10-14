@@ -37,15 +37,17 @@ class TerminalList extends Component
     public function mount(){
         $this->terminal = new Terminal;
         $this->todaList = Toda::get();
+        if(auth()->user()->user_type != 0){
+            $this->terminal->toda_id = auth()->user()->toda_id;
+        }
     }
-   
     public function getDataList(){
         return Terminal::where(function ($query){
              $query->where('terminal_name', 'like', '%' . $this->search . '%');
         })
-      /*   ->when(auth()->user()->user_type != 0 ,function ($query){
+        ->when(auth()->user()->user_type != 0 ,function ($query){
             $query->find(auth()->user()->toda_id);
-        }) */
+        })
         ->paginate($this->displaypage);
     }
     public function onCancel(){
